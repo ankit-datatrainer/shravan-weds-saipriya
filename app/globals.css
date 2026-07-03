@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: #b76e79;
+  color: #fffaf3;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #fdf6f4;
+}
+::-webkit-scrollbar-thumb {
+  background: #b76e79;
+  border-radius: 8px;
+}
+
+@layer components {
+  .gold-text {
+    background: linear-gradient(90deg, #9a7524, #d4af37, #e9d8a6, #d4af37, #9a7524);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 4s linear infinite;
+  }
+
+  .ornate-border {
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    box-shadow: 0 0 0 4px #fffaf3, 0 0 0 5px rgba(212, 175, 55, 0.35);
+  }
+
+  .section-eyebrow {
+    @apply text-xs uppercase tracking-[0.4em] text-rosegold;
+  }
+}
