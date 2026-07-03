@@ -4,6 +4,13 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -39,5 +46,49 @@ html {
 
   .section-eyebrow {
     @apply text-xs uppercase tracking-[0.4em] text-rosegold;
+  }
+
+  .paper-texture {
+    background-color: #faf5ea;
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(239, 179, 169, 0.14), transparent 55%),
+      radial-gradient(ellipse at 80% 90%, rgba(212, 175, 55, 0.1), transparent 55%),
+      radial-gradient(ellipse at 85% 15%, rgba(138, 154, 91, 0.08), transparent 50%),
+      radial-gradient(ellipse at 10% 85%, rgba(183, 110, 121, 0.1), transparent 50%);
+  }
+
+  .card-3d {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+}
+
+@keyframes petal-fall {
+  0% {
+    transform: translate3d(0, -8vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(var(--sway, 40px), 108vh, 0) rotate(var(--spin, 320deg));
+    opacity: 0.75;
+  }
+}
+
+.petal {
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+  animation: petal-fall var(--dur, 12s) linear var(--delay, 0s) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .petal {
+    display: none;
+  }
+  html {
+    scroll-behavior: auto;
   }
 }

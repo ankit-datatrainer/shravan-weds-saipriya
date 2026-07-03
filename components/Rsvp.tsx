@@ -32,7 +32,7 @@ export default function Rsvp() {
   }
 
   return (
-    <section id="rsvp" className="bg-blush-50 py-24 px-6">
+    <section id="rsvp" className="paper-texture py-16 sm:py-24 px-4 sm:px-6">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -43,23 +43,23 @@ export default function Rsvp() {
         <p className="section-eyebrow flex items-center justify-center gap-3">
           <MailOpen className="w-4 h-4" /> Kindly Respond
         </p>
-        <h2 className="mt-4 font-heading text-4xl md:text-6xl tracking-[0.15em] text-maroon-800 uppercase">
+        <h2 className="mt-4 font-heading text-3xl sm:text-4xl md:text-6xl tracking-[0.1em] sm:tracking-[0.15em] text-maroon-800 uppercase">
           RSVP
         </h2>
-        <p className="mt-4 text-maroon-700/70">
+        <p className="mt-4 text-sm sm:text-base text-maroon-700/70">
           Your presence is the greatest gift. Please let us know if you can join us.
         </p>
 
         {status === "done" ? (
-          <div className="mt-12 ornate-border rounded-2xl bg-white/80 p-10">
-            <CheckCircle2 className="mx-auto w-12 h-12 text-sage" />
-            <p className="mt-4 font-heading text-2xl text-maroon-700">
+          <div className="mt-10 sm:mt-12 ornate-border rounded-2xl bg-white/80 p-6 sm:p-10">
+            <CheckCircle2 className="mx-auto w-10 h-10 sm:w-12 sm:h-12 text-sage" />
+            <p className="mt-4 font-heading text-xl sm:text-2xl text-maroon-700">
               Thank you! Your response has been recorded.
             </p>
             <p className="mt-2 text-sm text-maroon-700/60">We can&apos;t wait to celebrate with you.</p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="mt-12 ornate-border rounded-2xl bg-white/80 p-8 md:p-10 text-left space-y-5">
+          <form onSubmit={handleSubmit} className="mt-10 sm:mt-12 ornate-border rounded-t-[3.5rem] rounded-b-2xl bg-white/80 p-5 sm:p-8 md:p-10 text-left space-y-5">
             <div>
               <label htmlFor="name" className="text-xs uppercase tracking-[0.25em] text-rosegold">
                 Full Name
@@ -69,7 +69,7 @@ export default function Rsvp() {
                 name="name"
                 required
                 minLength={2}
-                className="mt-2 w-full rounded-lg border border-blush-200 bg-cream px-4 py-3 outline-none focus:border-rosegold transition"
+                className="mt-2 w-full rounded-lg border border-blush-200 bg-cream px-4 py-3 text-base outline-none focus:border-rosegold transition"
                 placeholder="Your name"
               />
             </div>
@@ -82,11 +82,11 @@ export default function Rsvp() {
                 name="phone"
                 required
                 pattern="[+0-9\s-]{7,15}"
-                className="mt-2 w-full rounded-lg border border-blush-200 bg-cream px-4 py-3 outline-none focus:border-rosegold transition"
+                className="mt-2 w-full rounded-lg border border-blush-200 bg-cream px-4 py-3 text-base outline-none focus:border-rosegold transition"
                 placeholder="+91 98765 43210"
               />
             </div>
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <label htmlFor="attending" className="text-xs uppercase tracking-[0.25em] text-rosegold">
                   Attending?
@@ -95,7 +95,7 @@ export default function Rsvp() {
                   id="attending"
                   name="attending"
                   required
-                  className="mt-2 w-full rounded-lg border border-blush-200 bg-cream px-4 py-3 outline-none focus:border-rosegold transition"
+                  className="mt-2 w-full rounded-lg border border-blush-200 bg-cream px-4 py-3 text-base outline-none focus:border-rosegold transition"
                 >
                   <option value="yes">Joyfully accepts</option>
                   <option value="no">Regretfully declines</option>
@@ -113,7 +113,7 @@ export default function Rsvp() {
                   max={10}
                   defaultValue={1}
                   required
-                  className="mt-2 w-full rounded-lg border border-blush-200 bg-cream px-4 py-3 outline-none focus:border-rosegold transition"
+                  className="mt-2 w-full rounded-lg border border-blush-200 bg-cream px-4 py-3 text-base outline-none focus:border-rosegold transition"
                 />
               </div>
             </div>
@@ -126,7 +126,7 @@ export default function Rsvp() {
                 name="message"
                 rows={3}
                 maxLength={500}
-                className="mt-2 w-full rounded-lg border border-blush-200 bg-cream px-4 py-3 outline-none focus:border-rosegold transition resize-none"
+                className="mt-2 w-full rounded-lg border border-blush-200 bg-cream px-4 py-3 text-base outline-none focus:border-rosegold transition resize-none"
                 placeholder="Your blessings & wishes"
               />
             </div>

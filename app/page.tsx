@@ -5,11 +5,13 @@ import Venue from "@/components/Venue";
 import Rsvp from "@/components/Rsvp";
 import Footer from "@/components/Footer";
 import InviteReveal from "@/components/InviteReveal";
+import FallingPetals from "@/components/decor/FallingPetals";
 
 export default function Home() {
   return (
     <InviteReveal>
       <main>
+        <FallingPetals />
         <Hero />
         <SaveTheDate />
         <Events />

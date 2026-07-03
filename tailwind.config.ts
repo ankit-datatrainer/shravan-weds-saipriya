@@ -26,7 +26,22 @@ const config: Config = {
           600: "#9a7524",
         },
         cream: "#fffaf3",
+        ivory: "#faf5ea",
         sage: "#8a9a5b",
+        leaf: {
+          500: "#6f7f54",
+          600: "#5b6b46",
+          700: "#47543a",
+        },
+        marigold: {
+          400: "#f5a623",
+          500: "#e8890c",
+          600: "#c96f06",
+        },
+        peacock: {
+          500: "#0e7c7b",
+          700: "#0a5c66",
+        },
       },
       fontFamily: {
         heading: ["var(--font-cormorant)", "serif"],
@@ -47,11 +62,21 @@ const config: Config = {
           "0%": { backgroundPosition: "-200% center" },
           "100%": { backgroundPosition: "200% center" },
         },
+        twinkle: {
+          "0%, 100%": { opacity: "0.2", transform: "scale(0.6)" },
+          "50%": { opacity: "1", transform: "scale(1.15)" },
+        },
+        sway: {
+          "0%, 100%": { transform: "rotate(-2deg)" },
+          "50%": { transform: "rotate(2deg)" },
+        },
       },
       animation: {
         float: "float 5s ease-in-out infinite",
         swing: "swing 3s ease-in-out infinite",
         shimmer: "shimmer 4s linear infinite",
+        twinkle: "twinkle 2.4s ease-in-out infinite",
+        sway: "sway 6s ease-in-out infinite",
       },
     },
   },
