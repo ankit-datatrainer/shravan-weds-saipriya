@@ -72,30 +72,31 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          className="mt-6 flex flex-col items-center justify-center gap-1 sm:gap-3"
+          className="mt-6 flex flex-col items-center justify-center gap-4 sm:gap-6"
         >
-          <span className="font-script text-4xl sm:text-5xl md:text-6xl gold-text leading-tight break-words text-center">
-            {wedding.groom.name}
-          </span>
-          <span className="font-script text-3xl sm:text-4xl text-rosegold">&amp;</span>
-          <span className="font-script text-4xl sm:text-5xl md:text-6xl gold-text leading-tight break-words text-center">
-            {wedding.bride.name}
-          </span>
+          <div className="flex flex-col items-center gap-1">
+            <span className="font-script text-4xl sm:text-5xl md:text-6xl gold-text leading-tight break-words text-center">
+              {wedding.groom.name}
+            </span>
+            <span className="text-[11px] sm:text-sm text-maroon-700/75">
+              {wedding.groom.parents}
+            </span>
+          </div>
+
+          <span className="font-script text-3xl sm:text-4xl text-rosegold -my-2">&amp;</span>
+
+          <div className="flex flex-col items-center gap-1">
+            <span className="font-script text-4xl sm:text-5xl md:text-6xl gold-text leading-tight break-words text-center">
+              {wedding.bride.name}
+            </span>
+            <span className="text-[11px] sm:text-sm text-maroon-700/75">
+              {wedding.bride.parents}
+            </span>
+          </div>
         </motion.div>
 
         <motion.div
           custom={5}
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          className="mt-4 space-y-1 text-[11px] sm:text-sm text-maroon-700/65"
-        >
-          <p>{wedding.groom.parents}</p>
-          <p>{wedding.bride.parents}</p>
-        </motion.div>
-
-        <motion.div
-          custom={6}
           initial="hidden"
           animate="visible"
           variants={fadeUp}
@@ -104,7 +105,7 @@ export default function Hero() {
           <Image src="/images/couple.png" alt="Indian Wedding Couple" fill className="object-cover" />
         </motion.div>
 
-        <motion.div custom={7} initial="hidden" animate="visible" variants={fadeUp} className="mt-4">
+        <motion.div custom={6} initial="hidden" animate="visible" variants={fadeUp} className="mt-4">
           <p className="font-heading text-lg sm:text-2xl tracking-[0.2em] text-maroon-700">
             {wedding.dateDisplay}
           </p>

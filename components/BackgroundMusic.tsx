@@ -32,9 +32,21 @@ export default function BackgroundMusic({ playWhen }: { playWhen: boolean }) {
     setMuted((m) => !m);
   }
 
+  function handleTimeUpdate() {
+    if (audioRef.current && audioRef.current.currentTime >= 28) {
+      audioRef.current.currentTime = 0;
+    }
+  }
+
   return (
     <>
-      <audio ref={audioRef} src="/audio/bgm.mp3" loop preload="none" />
+      <audio 
+        ref={audioRef} 
+        src="/audio/bgm.mp3" 
+        loop 
+        preload="none" 
+        onTimeUpdate={handleTimeUpdate} 
+      />
       {started && (
         <button
           type="button"

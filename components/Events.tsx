@@ -10,10 +10,10 @@ import EventFlowers from "./decor/EventFlowers";
 import FlyingBirds from "./decor/FlyingBirds";
 
 const eventImages: Record<string, string> = {
-  haldi: "/images/events/haldi-ai.png",
-  mehendi: "/images/events/mehendi-ai.png",
-  sangeet: "/images/events/sangeet-ai.png",
-  wedding: "/images/events/wedding-ai.png",
+  haldi: "/images/events/haldi-cartoon.png",
+  mehendi: "/images/events/mehendi-cartoon.png",
+  sangeet: "/images/events/sangeet-cartoon.png",
+  wedding: "/images/events/wedding-cartoon.png",
 };
 
 const themes = {
