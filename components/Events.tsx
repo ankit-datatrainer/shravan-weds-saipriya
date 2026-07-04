@@ -10,10 +10,10 @@ import EventFlowers from "./decor/EventFlowers";
 import FlyingBirds from "./decor/FlyingBirds";
 
 const eventImages: Record<string, string> = {
-  haldi: "/images/events/haldi.jpg",
-  mehendi: "/images/events/mehendi.jpg",
-  sangeet: "/images/events/sangeet.jpg",
-  wedding: "/images/events/wedding.jpg",
+  haldi: "/images/events/haldi-ai.png",
+  mehendi: "/images/events/mehendi-ai.png",
+  sangeet: "/images/events/sangeet-ai.png",
+  wedding: "/images/events/wedding-ai.png",
 };
 
 const themes = {
@@ -106,9 +106,9 @@ export default function Events() {
                 </div>
 
                 {/* Details section */}
-                <div className="px-6 py-5 space-y-3 bg-maroon-950/95">
+                <div className="px-6 py-5 space-y-3 bg-maroon-950">
                   <div className="h-px w-full bg-gradient-to-r from-transparent via-gold-500/50 to-transparent" />
-                  <div className="space-y-2 text-xs sm:text-sm text-cream/80">
+                  <div className="space-y-2 text-xs sm:text-sm text-cream/90">
                     <p className="inline-flex items-center gap-2">
                       <CalendarDays className="h-4 w-4 shrink-0 text-gold-400" />
                       {event.date}
