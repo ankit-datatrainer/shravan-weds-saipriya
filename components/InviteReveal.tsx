@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { wedding } from "@/lib/config";
-import GaneshaMotif from "./GaneshaMotif";
-import Garland from "./decor/Garland";
+import Image from "next/image";
+import BackgroundMusic from "./BackgroundMusic";
 
 /** Filigree pattern for a card door; mirrored for the right side. */
 function DoorOrnament({ mirrored = false }: { mirrored?: boolean }) {
@@ -28,16 +28,15 @@ function DoorOrnament({ mirrored = false }: { mirrored?: boolean }) {
           </g>
         );
       })}
-      {/* half medallion at the meeting edge */}
-      <g opacity="0.75">
-        <circle cx="200" cy="300" r="72" stroke="#d4af37" strokeWidth="1.5" />
-        <circle cx="200" cy="300" r="58" stroke="#d4af37" strokeWidth="1" />
-        <circle cx="200" cy="300" r="42" stroke="#e9d8a6" strokeWidth="1" />
-        {Array.from({ length: 12 }, (_, i) => {
-          const a = (i / 12) * Math.PI * 2;
-          const x = 200 + Math.cos(a) * 65;
-          const y = 300 + Math.sin(a) * 65;
-          return <circle key={i} cx={x} cy={y} r="3" fill="#d4af37" />;
+      {/* Large outer medallion ring, empty center to frame text */}
+      <g opacity="0.65">
+        <circle cx="200" cy="300" r="92" stroke="#d4af37" strokeWidth="1.5" />
+        <circle cx="200" cy="300" r="82" stroke="#d4af37" strokeWidth="0.75" />
+        {Array.from({ length: 16 }, (_, i) => {
+          const a = (i / 16) * Math.PI * 2;
+          const x = 200 + Math.cos(a) * 87;
+          const y = 300 + Math.sin(a) * 87;
+          return <circle key={i} cx={x} cy={y} r="1.5" fill="#d4af37" />;
         })}
       </g>
     </svg>
@@ -91,40 +90,41 @@ export default function InviteReveal({ children }: { children: React.ReactNode }
               animate={opened ? { opacity: 0, scale: 1.06 } : { opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="absolute top-0 inset-x-0">
-                <Garland className="w-full h-14 sm:h-20 opacity-90" />
+              <div className="absolute top-0 inset-x-0 h-14 sm:h-20">
               </div>
 
               <button
                 type="button"
                 onClick={() => setOpened(true)}
                 disabled={opened}
-                className="group flex flex-col items-center gap-4 sm:gap-6 outline-none"
+                className="group flex flex-col items-center justify-center gap-3 sm:gap-4 outline-none max-w-[85vw] mx-auto"
                 aria-label="Open the wedding invitation"
               >
                 <motion.div
                   animate={{ rotate: [0, 3, -3, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full ornate-border overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.45)]"
+                  className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full ornate-border overflow-hidden shadow-[0_0_40px_rgba(212,175,55,0.4)] relative"
                 >
-                  <GaneshaMotif className="w-full h-full" />
+                  <Image src="/images/ganesha.png" alt="Lord Ganesha" fill className="object-cover" />
                 </motion.div>
 
-                <p className="font-devanagari text-gold-300 text-sm sm:text-base md:text-lg tracking-wide">
+                <p className="font-devanagari text-gold-300 text-xs sm:text-sm md:text-base tracking-wide mt-1">
                   {wedding.shloka.devanagari}
                 </p>
 
-                <p className="section-eyebrow text-gold-300/90">You&apos;re Invited to the Wedding of</p>
+                <p className="section-eyebrow text-gold-300/90 mt-2 text-[10px] sm:text-xs tracking-[0.2em]">You&apos;re Invited to the Wedding of</p>
 
-                <h1 className="font-script text-3xl sm:text-4xl md:text-6xl gold-text leading-tight px-4 break-words">
-                  {wedding.groom.name} &amp; {wedding.bride.name}
+                <h1 className="font-script flex flex-col items-center justify-center text-4xl sm:text-5xl md:text-6xl gold-text leading-none py-1 drop-shadow-sm break-words text-center">
+                  <span>{wedding.groom.name}</span>
+                  <span className="text-2xl sm:text-3xl my-1 sm:my-2 text-gold-400 font-sans italic">&amp;</span>
+                  <span>{wedding.bride.name}</span>
                 </h1>
 
-                <span className="mt-2 sm:mt-4 inline-flex items-center gap-2 rounded-full border border-gold-400/70 px-6 sm:px-8 py-2.5 sm:py-3 text-xs md:text-sm uppercase tracking-[0.25em] sm:tracking-[0.35em] text-gold-300 group-hover:bg-gold-400 group-hover:text-maroon-900 transition-colors duration-500">
-                  Tap to Open the Card
+                <span className="mt-2 sm:mt-4 inline-flex items-center gap-2 rounded-full border border-gold-400/50 bg-maroon-950/40 backdrop-blur-sm px-6 sm:px-8 py-2 sm:py-2.5 text-[10px] md:text-xs uppercase tracking-[0.25em] text-gold-200 group-hover:bg-gold-400 group-hover:text-maroon-900 transition-colors duration-500 shadow-xl">
+                  Tap to Open
                 </span>
 
-                <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cream/40">
+                <span className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-cream/50 mt-1 sm:mt-2">
                   {wedding.dateDisplay}
                 </span>
               </button>
@@ -140,6 +140,8 @@ export default function InviteReveal({ children }: { children: React.ReactNode }
       >
         {children}
       </motion.div>
+
+      <BackgroundMusic playWhen={opened} />
     </>
   );
 }

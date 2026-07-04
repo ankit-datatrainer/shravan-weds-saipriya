@@ -2,10 +2,8 @@
 
 import { motion } from "framer-motion";
 import { wedding } from "@/lib/config";
-import Garland from "./decor/Garland";
-import Peacock from "./decor/Peacock";
-import CoupleIllustration from "./decor/CoupleIllustration";
 import Sparkles from "./decor/Sparkles";
+import Image from "next/image";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -19,14 +17,7 @@ const fadeUp = {
 export default function Hero() {
   return (
     <section className="relative overflow-hidden paper-texture px-3 sm:px-6 pb-16 sm:pb-24">
-      {/* toran across the very top */}
-      <div className="relative -mx-3 sm:-mx-6">
-        <Garland className="w-full h-14 sm:h-20 md:h-24 animate-sway origin-top" />
-      </div>
-
-      {/* peacocks flanking the card */}
-      <Peacock className="pointer-events-none absolute bottom-6 -left-8 w-40 opacity-70 hidden lg:block" />
-      <Peacock className="pointer-events-none absolute bottom-6 -right-8 w-40 opacity-70 -scale-x-100 hidden lg:block" />
+      {/* Decorative SVGs removed for cleaner photo-based UI */}
 
       {/* the card panel with arch top */}
       <motion.div
@@ -81,13 +72,13 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-4"
+          className="mt-6 flex flex-col items-center justify-center gap-1 sm:gap-3"
         >
-          <span className="font-script text-4xl sm:text-5xl md:text-6xl gold-text leading-tight break-words">
+          <span className="font-script text-4xl sm:text-5xl md:text-6xl gold-text leading-tight break-words text-center">
             {wedding.groom.name}
           </span>
           <span className="font-script text-3xl sm:text-4xl text-rosegold">&amp;</span>
-          <span className="font-script text-4xl sm:text-5xl md:text-6xl gold-text leading-tight break-words">
+          <span className="font-script text-4xl sm:text-5xl md:text-6xl gold-text leading-tight break-words text-center">
             {wedding.bride.name}
           </span>
         </motion.div>
@@ -108,9 +99,9 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          className="mt-6 sm:mt-8"
+          className="mt-6 sm:mt-8 relative mx-auto w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-gold-400/50 shadow-lg shadow-gold-500/10"
         >
-          <CoupleIllustration className="mx-auto w-56 sm:w-72 md:w-80" />
+          <Image src="/images/couple.png" alt="Indian Wedding Couple" fill className="object-cover" />
         </motion.div>
 
         <motion.div custom={7} initial="hidden" animate="visible" variants={fadeUp} className="mt-4">

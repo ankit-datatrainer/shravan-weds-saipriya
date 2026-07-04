@@ -47,7 +47,11 @@ export default function Rsvp() {
           RSVP
         </h2>
         <p className="mt-4 text-sm sm:text-base text-maroon-700/70">
-          Your presence is the greatest gift. Please let us know if you can join us.
+          Your presence is the greatest gift{" "}
+          <span className="name-highlight text-xl sm:text-2xl align-middle">
+            Shravan &amp; Sai Priya
+          </span>{" "}
+          could ask for. Please let us know if you can join us.
         </p>
 
         {status === "done" ? (

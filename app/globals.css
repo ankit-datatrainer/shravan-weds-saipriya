@@ -37,6 +37,12 @@ body {
     background-clip: text;
     color: transparent;
     animation: shimmer 4s linear infinite;
+    filter: drop-shadow(0 1px 10px rgba(212, 175, 55, 0.35));
+  }
+
+  /* Consistent highlight for the couple's names wherever they appear */
+  .name-highlight {
+    @apply gold-text font-script;
   }
 
   .ornate-border {
@@ -84,8 +90,66 @@ body {
   animation: petal-fall var(--dur, 12s) linear var(--delay, 0s) infinite;
 }
 
+/* Section-scoped falling flowers (relative to their own container, not the viewport) */
+@keyframes petal-fall-local {
+  0% {
+    transform: translate3d(0, -10%, 0) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(var(--sway, 40px), 115%, 0) rotate(var(--spin, 320deg));
+    opacity: 0.7;
+  }
+}
+
+.petal-local {
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+  animation: petal-fall-local var(--dur, 12s) linear var(--delay, 0s) infinite;
+}
+
+@keyframes bird-fly {
+  0% {
+    transform: translate3d(-12vw, 0, 0);
+  }
+  50% {
+    transform: translate3d(55vw, -26px, 0);
+  }
+  100% {
+    transform: translate3d(120vw, 6px, 0);
+  }
+}
+
+.bird-fly {
+  position: absolute;
+  left: 0;
+  pointer-events: none;
+  animation: bird-fly var(--dur, 20s) linear var(--delay, 0s) infinite;
+}
+
+@keyframes wing-flap {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0.35);
+  }
+}
+
+.wing-flap {
+  animation: wing-flap 0.35s ease-in-out infinite alternate;
+  transform-origin: 20px 8px;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .petal {
+  .petal,
+  .petal-local,
+  .bird-fly,
+  .wing-flap {
     display: none;
   }
   html {

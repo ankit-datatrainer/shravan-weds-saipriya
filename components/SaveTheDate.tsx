@@ -57,7 +57,11 @@ export default function SaveTheDate() {
           The Big Day
         </h2>
         <p className="mt-4 text-sm sm:text-base text-maroon-700/70 max-w-md mx-auto">
-          A little surprise, sealed in gold — scratch the card below to unveil our wedding date.
+          A little surprise from{" "}
+          <span className="name-highlight text-xl sm:text-2xl align-middle">
+            {wedding.groom.name} &amp; {wedding.bride.name}
+          </span>
+          , sealed in gold — scratch the card below to unveil our wedding date.
         </p>
 
         {/* scratch card */}

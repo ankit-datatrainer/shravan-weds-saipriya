@@ -29,6 +29,12 @@ export default function Venue() {
           {wedding.venue.name}
         </h2>
         <p className="mt-3 text-sm sm:text-base text-maroon-700/70">{wedding.venue.address}</p>
+        <p className="mt-4 text-sm sm:text-base text-maroon-700/70">
+          <span className="name-highlight text-xl sm:text-2xl align-middle">
+            {wedding.groom.name} &amp; {wedding.bride.name}
+          </span>{" "}
+          warmly invite you to join them here
+        </p>
         <a
           href={wedding.venue.mapUrl}
           target="_blank"
