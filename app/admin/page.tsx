@@ -10,7 +10,7 @@ interface RsvpEntry {
   name: string;
   phone: string;
   events: string;
-  guests: number;
+  guests: string;
   message: string;
   at: string;
 }
