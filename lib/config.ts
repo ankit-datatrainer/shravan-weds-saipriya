@@ -24,6 +24,33 @@ export const wedding = {
   },
   events: [
     {
+      id: "mehendi",
+      name: "Mehendi Ceremony",
+      tagline: "An evening of intricate henna and joy",
+      date: "20th August 2026",
+      time: "2:00 PM CST",
+      venue: "Aurora, Illinois",
+      theme: "mehendi" as const,
+    },
+    {
+      id: "sangeet",
+      name: "Sangeet Night",
+      tagline: "A night of music, dance and celebration",
+      date: "21st August 2026",
+      time: "3:00 PM to 8:00 PM",
+      venue: "Aurora, Illinois",
+      theme: "sangeet" as const,
+    },
+    {
+      id: "haldi",
+      name: "Haldi Ceremony",
+      tagline: "Filled with love, laughter and turmeric",
+      date: "22nd August 2026",
+      time: "12:00 PM CST",
+      venue: "Aurora, Illinois",
+      theme: "haldi" as const,
+    },
+    {
       id: "wedding",
       name: "Wedding Ceremony",
       tagline: "The sacred union — Shubh Vivah",

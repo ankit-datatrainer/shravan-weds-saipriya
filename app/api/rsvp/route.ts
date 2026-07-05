@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
+import { supabase } from "@/lib/supabase";
 
-export const runtime = "edge";
+export const runtime = "edge"; // Can use edge runtime with Supabase!
 
 interface RsvpPayload {
   name?: string;
   phone?: string;
-  attending?: string;
+  events?: string;
   guests?: string;
   message?: string;
 }
@@ -20,7 +21,7 @@ export async function POST(request: Request) {
 
   const name = body.name?.trim();
   const phone = body.phone?.trim();
-  const attending = body.attending === "no" ? "no" : "yes";
+  const events = body.events?.trim();
   const guests = Math.min(10, Math.max(1, Number(body.guests) || 1));
   const message = body.message?.trim().slice(0, 500) ?? "";
 
@@ -30,12 +31,36 @@ export async function POST(request: Request) {
   if (!phone || !/^[+0-9\s-]{7,15}$/.test(phone)) {
     return NextResponse.json({ error: "Please enter a valid phone number" }, { status: 400 });
   }
+  if (!events) {
+    return NextResponse.json({ error: "Please select at least one event" }, { status: 400 });
+  }
 
-  const entry = { name, phone, attending, guests, message, at: new Date().toISOString() };
+  const entry = { 
+    id: crypto.randomUUID(),
+    name, 
+    phone, 
+    events, 
+    guests, 
+    message, 
+    at: new Date().toISOString() 
+  };
 
-  // Vercel's filesystem is read-only, so RSVPs are forwarded to a webhook.
-  // Set RSVP_WEBHOOK_URL in Vercel env vars to a Google Sheets Apps Script
-  // web app, Formspree endpoint, or Discord/Slack webhook to collect entries.
+  // Save to Supabase
+  try {
+    const { error } = await supabase
+      .from('rsvps')
+      .insert([entry]);
+
+    if (error) {
+      console.error("Supabase insert error:", error);
+      throw error;
+    }
+  } catch (err) {
+    console.error("Failed to save RSVP to Supabase", err);
+    return NextResponse.json({ error: "Could not save RSVP, please try again" }, { status: 500 });
+  }
+
+  // Also keep the webhook logic if configured
   const webhook = process.env.RSVP_WEBHOOK_URL;
   if (webhook) {
     try {
@@ -46,10 +71,7 @@ export async function POST(request: Request) {
       });
     } catch (err) {
       console.error("RSVP webhook failed", err);
-      return NextResponse.json({ error: "Could not save RSVP, please try again" }, { status: 502 });
     }
-  } else {
-    console.log("RSVP received (no webhook configured):", entry);
   }
 
   return NextResponse.json({ ok: true });

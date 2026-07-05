@@ -15,16 +15,16 @@ interface Rose {
 const ROSE_IMAGES = ["/images/rose1.png"];
 
 /** Small cute red roses drifting down randomly over the whole page. */
-export default function FallingPetals({ count = 5 }: { count?: number }) {
+export default function FallingPetals({ count = 12 }: { count?: number }) {
   const [roses, setRoses] = useState<Rose[]>([]);
 
   useEffect(() => {
     setRoses(
       Array.from({ length: count }, () => ({
         left: Math.random() * 100,
-        size: 22 + Math.random() * 16,
+        size: 35 + Math.random() * 20, // Medium flowers
         dur: 11 + Math.random() * 10,
-        delay: Math.random() * 14,
+        delay: -(Math.random() * 20), // Negative delay so they start immediately
         sway: (Math.random() - 0.5) * 180,
         spin: 120 + Math.random() * 360,
         img: ROSE_IMAGES[Math.floor(Math.random() * ROSE_IMAGES.length)],
