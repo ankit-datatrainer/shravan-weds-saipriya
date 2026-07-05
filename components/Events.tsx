@@ -61,13 +61,13 @@ export default function Events() {
         className="relative z-10 text-center"
       >
         <h2 className="font-heading text-3xl sm:text-4xl md:text-6xl tracking-[0.12em] sm:tracking-[0.2em] text-maroon-800 uppercase">
-          Events Schedule
+          Wedding Details
         </h2>
-        <p className="mt-3 section-eyebrow">Four Days of Celebration</p>
+        <p className="mt-3 section-eyebrow">The Big Day</p>
         <Garland className="mx-auto mt-4 h-10 w-64 sm:w-96 opacity-80" />
       </motion.div>
 
-      <div className="relative z-10 mt-10 sm:mt-16 mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2">
+      <div className="relative z-10 mt-10 sm:mt-16 mx-auto grid max-w-xl grid-cols-1 gap-6 sm:gap-8">
         {wedding.events.map((event, i) => {
           const t = themes[event.theme as keyof typeof themes] ?? themes.wedding;
           const img = eventImages[event.theme] ?? eventImages.wedding;

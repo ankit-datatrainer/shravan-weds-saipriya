@@ -71,7 +71,7 @@ export default function SaveTheDate() {
               <div className="relative flex h-44 sm:h-52 flex-col items-center justify-center rounded-xl bg-gradient-to-br from-blush-50 via-cream to-gold-300/25 px-4 overflow-hidden">
                 {revealed && <Sparkles />}
                 <p className="section-eyebrow">Shubh Vivah Muhurat</p>
-                <p className="mt-3 font-heading text-3xl sm:text-4xl md:text-5xl tracking-wide text-maroon-700 whitespace-nowrap">
+                <p className="mt-3 font-heading text-3xl sm:text-4xl md:text-5xl tracking-wide text-maroon-700">
                   {wedding.dateDisplay}
                 </p>
                 <p className="mt-3 inline-flex items-center gap-2 text-sm sm:text-base text-maroon-700/75">

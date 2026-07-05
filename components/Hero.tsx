@@ -100,15 +100,13 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          className="mt-6 sm:mt-8 relative mx-auto w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-gold-400/50 shadow-lg shadow-gold-500/10"
+          className="mt-6 sm:mt-8 relative mx-auto w-56 h-72 sm:w-64 sm:h-[22rem] md:w-[22rem] md:h-[28rem] rounded-t-[12rem] rounded-b-3xl overflow-hidden border-4 border-gold-400/50 shadow-2xl shadow-gold-500/20"
         >
-          <Image src="/images/couple.jpeg" alt="Shravan and Sai Priya" fill className="object-cover object-[center_20%]" />
+          <Image src="/images/couple.jpeg" alt="Shravan and Sai Priya" fill className="object-cover object-center" />
         </motion.div>
 
         <motion.div custom={6} initial="hidden" animate="visible" variants={fadeUp} className="mt-4">
-          <p className="font-heading text-lg sm:text-2xl tracking-[0.2em] text-maroon-700">
-            {wedding.dateDisplay}
-          </p>
+
           <p className="mt-2 section-eyebrow">{wedding.hashtag}</p>
         </motion.div>
       </motion.div>

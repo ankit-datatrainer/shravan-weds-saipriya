@@ -94,7 +94,7 @@ export default function InviteReveal({ children }: { children: React.ReactNode }
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                   className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full ornate-border overflow-hidden shadow-[0_0_40px_rgba(212,175,55,0.4)] relative"
                 >
-                  <Image src="/images/ganesha.png" alt="Lord Ganesha" fill className="object-cover" />
+                  <Image src="/images/ganesha.png" alt="Lord Ganesha" fill className="object-contain p-2" />
                 </motion.div>
 
                 <p className="font-devanagari text-gold-300 text-sm sm:text-base md:text-lg tracking-wide mt-2">
