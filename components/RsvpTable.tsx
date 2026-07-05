@@ -25,11 +25,12 @@ export default function RsvpTable({ initialData }: { initialData: RsvpEntry[] })
 
     setIsDeleting(id);
     try {
-      const res = await fetch(`/api/rsvp/${id}`, { method: "DELETE" });
-      if (res.ok) {
-        setRsvps((prev) => prev.filter((r) => (r.id || r.at) !== id));
-      } else {
-        alert("Failed to delete");
+      const stored = localStorage.getItem("wedding_rsvps");
+      if (stored) {
+        const parsed = JSON.parse(stored) as RsvpEntry[];
+        const updated = parsed.filter(r => (r.id || r.at) !== id);
+        localStorage.setItem("wedding_rsvps", JSON.stringify(updated));
+        setRsvps(prev => prev.filter((r) => (r.id || r.at) !== id));
       }
     } catch (err) {
       alert("Error deleting RSVP");
@@ -53,19 +54,17 @@ export default function RsvpTable({ initialData }: { initialData: RsvpEntry[] })
     setIsSaving(true);
     
     try {
-      const res = await fetch(`/api/rsvp/${isEditing}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(editForm),
-      });
-
-      if (res.ok) {
-        setRsvps((prev) =>
-          prev.map((r) => ((r.id || r.at) === isEditing ? { ...r, ...editForm } : r))
+      const stored = localStorage.getItem("wedding_rsvps");
+      if (stored) {
+        const parsed = JSON.parse(stored) as RsvpEntry[];
+        const updated = parsed.map(r => 
+          (r.id || r.at) === isEditing ? { ...r, ...editForm } as RsvpEntry : r
+        );
+        localStorage.setItem("wedding_rsvps", JSON.stringify(updated));
+        setRsvps(prev =>
+          prev.map((r) => ((r.id || r.at) === isEditing ? { ...r, ...editForm } as RsvpEntry : r))
         );
         setIsEditing(null);
-      } else {
-        alert("Failed to update");
       }
     } catch (err) {
       alert("Error updating RSVP");

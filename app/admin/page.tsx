@@ -1,11 +1,12 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { Users, MailOpen, Phone } from "lucide-react";
-import { supabase } from "@/lib/supabase";
 import LogoutButton from "@/components/LogoutButton";
 import RsvpTable from "@/components/RsvpTable";
 
-export const dynamic = "force-dynamic";
-
 interface RsvpEntry {
+  id?: string;
   name: string;
   phone: string;
   events: string;
@@ -14,29 +15,31 @@ interface RsvpEntry {
   at: string;
 }
 
-export default async function AdminPage() {
-  let rsvps: RsvpEntry[] = [];
-  try {
-    const { data, error } = await supabase
-      .from('rsvps')
-      .select('*')
-      .order('at', { ascending: false });
-      
-    if (!error && data) {
-      rsvps = data as RsvpEntry[];
-    }
-  } catch (err) {
-    console.error("Failed to fetch RSVPs from Supabase", err);
-  }
+export default function AdminPage() {
+  const [rsvps, setRsvps] = useState<RsvpEntry[]>([]);
+  const [mounted, setMounted] = useState(false);
 
-  // Sort descending by date
-  rsvps.sort((a, b) => new Date(b.at).getTime() - new Date(a.at).getTime());
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("wedding_rsvps");
+      if (stored) {
+        const parsed = JSON.parse(stored) as RsvpEntry[];
+        parsed.sort((a, b) => new Date(b.at).getTime() - new Date(a.at).getTime());
+        setRsvps(parsed);
+      }
+    } catch (err) {
+      console.error("Failed to fetch RSVPs from local storage", err);
+    }
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   // Count metrics
   const totalRsvps = rsvps.length;
   const totalGuestsAttending = rsvps
     .filter(r => r.events !== "Not attending")
-    .reduce((sum, r) => sum + r.guests, 0);
+    .reduce((sum, r) => sum + Number(r.guests || 1), 0);
 
   return (
     <div className="min-h-screen bg-cream p-6 sm:p-12 font-sans text-maroon-800">
@@ -45,7 +48,7 @@ export default async function AdminPage() {
         <header className="border-b border-blush-200 pb-6 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-heading tracking-widest uppercase">Admin Dashboard</h1>
-            <p className="text-maroon-700/70 mt-1">Manage and view your RSVPs</p>
+            <p className="text-maroon-700/70 mt-1">Manage and view your RSVPs (Local Storage)</p>
           </div>
           <LogoutButton />
         </header>

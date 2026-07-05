@@ -50,17 +50,18 @@ export default function Rsvp() {
     payload.events = selectedEvents.join(", ");
     
     try {
-      const res = await fetch("/api/rsvp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Something went wrong");
+      const existing = JSON.parse(localStorage.getItem("wedding_rsvps") || "[]");
+      const newEntry = {
+        id: crypto.randomUUID(),
+        ...payload,
+        at: new Date().toISOString(),
+      };
+      existing.push(newEntry);
+      localStorage.setItem("wedding_rsvps", JSON.stringify(existing));
       setStatus("done");
     } catch (err) {
       setStatus("error");
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError("Failed to save locally.");
     }
   }
 
