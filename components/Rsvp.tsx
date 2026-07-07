@@ -7,9 +7,7 @@ import { CheckCircle2, Loader2, MailOpen, Users } from "lucide-react";
 type Status = "idle" | "sending" | "done" | "error";
 
 const EVENT_OPTIONS = [
-  "Mehendi",
   "Sangeeth",
-  "Haldi",
   "Wedding",
   "All",
   "Not attending"
@@ -84,7 +82,7 @@ export default function Rsvp() {
           Your presence is the greatest gift. Please let us know which events you can join!
         </p>
         <p className="mt-2 text-sm sm:text-base text-maroon-700 font-medium">
-          For any questions, contact Ankit: <a href="tel:+16692120592" className="underline decoration-gold-400 decoration-2 underline-offset-4">+1 (669) 212-0592</a>
+          For any questions, contact Shravan Kumar: <a href="tel:+16692120592" className="underline decoration-gold-400 decoration-2 underline-offset-4">+1 (669) 212-0592</a>
         </p>
 
         {status === "done" ? (
