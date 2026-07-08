@@ -49,7 +49,7 @@ In Hostinger → **hPanel → Domains → moondropsmanpower.com → DNS / Namese
 
 | Type | Name | Value | TTL |
 |---|---|---|---|
-| A | `shravan-weds-saipriya` | `145.79.213.159` (this VPS's IP — confirm in hPanel → VPS → Overview) | Default / 14400 |
+| A | `shravan-weds-saipriya` | `46.28.44.107` (this VPS's IP — confirm in hPanel → VPS → Overview) | Default / 14400 |
 
 That's the only DNS change needed. Propagation is usually a few minutes, sometimes up to an hour.
 Verify with `nslookup shravan-weds-saipriya.moondropsmanpower.com` once added — it should resolve
@@ -58,7 +58,7 @@ to the VPS IP before you run Certbot in step 5.
 ### 2. SSH in and set up the app in its own directory
 
 ```bash
-ssh root@145.79.213.159
+ssh root@46.28.44.107
 mkdir -p /var/www/shravan-weds-saipriya
 cd /var/www/shravan-weds-saipriya
 git clone https://github.com/ankit-datatrainer/shravan-weds-saipriya.git .
@@ -96,7 +96,7 @@ it covers all PM2 processes on the box, not per-app.
 ### 5. Add the Nginx server block
 
 ```bash
-scp deploy/nginx.conf root@145.79.213.159:/etc/nginx/sites-available/shravan-weds-saipriya.conf
+scp deploy/nginx.conf root@46.28.44.107:/etc/nginx/sites-available/shravan-weds-saipriya.conf
 # or on the server directly: nano /etc/nginx/sites-available/shravan-weds-saipriya.conf
 # and paste the contents of deploy/nginx.conf from this repo
 
