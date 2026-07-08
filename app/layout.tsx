@@ -26,7 +26,7 @@ const tiro = Tiro_Devanagari_Hindi({
   variable: "--font-tiro",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://shravan-weds-saipriya.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://shravan-weds-saipriya.moondropsmanpower.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
