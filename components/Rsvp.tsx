@@ -115,7 +115,7 @@ export default function Rsvp() {
                 id="phone"
                 name="phone"
                 required
-                pattern="[+0-9\s-]{7,15}"
+                pattern="[0-9+\- ]{7,15}"
                 className="mt-2 w-full rounded-lg border border-blush-200 bg-cream px-4 py-3 text-base outline-none focus:border-rosegold transition"
                 placeholder="+91 98765 43210"
               />
