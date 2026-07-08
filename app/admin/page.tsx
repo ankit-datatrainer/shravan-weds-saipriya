@@ -6,31 +6,29 @@ import LogoutButton from "@/components/LogoutButton";
 import RsvpTable from "@/components/RsvpTable";
 
 interface RsvpEntry {
-  id?: string;
+  id: string;
   name: string;
   phone: string;
   events: string;
   guests: string;
   message: string;
-  at: string;
+  created_at: string;
 }
 
 export default function AdminPage() {
   const [rsvps, setRsvps] = useState<RsvpEntry[]>([]);
   const [mounted, setMounted] = useState(false);
+  const [loadError, setLoadError] = useState("");
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("wedding_rsvps");
-      if (stored) {
-        const parsed = JSON.parse(stored) as RsvpEntry[];
-        parsed.sort((a, b) => new Date(b.at).getTime() - new Date(a.at).getTime());
-        setRsvps(parsed);
-      }
-    } catch (err) {
-      console.error("Failed to fetch RSVPs from local storage", err);
-    }
-    setMounted(true);
+    fetch("/api/rsvp")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) throw new Error(data.error);
+        setRsvps(data.rsvps ?? []);
+      })
+      .catch((err) => setLoadError(err instanceof Error ? err.message : "Failed to load RSVPs"))
+      .finally(() => setMounted(true));
   }, []);
 
   if (!mounted) return null;
@@ -48,7 +46,7 @@ export default function AdminPage() {
         <header className="border-b border-blush-200 pb-6 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-heading tracking-widest uppercase">Admin Dashboard</h1>
-            <p className="text-maroon-700/70 mt-1">Manage and view your RSVPs (Local Storage)</p>
+            <p className="text-maroon-700/70 mt-1">Manage and view your RSVPs (Supabase)</p>
           </div>
           <LogoutButton />
         </header>
@@ -66,6 +64,12 @@ export default function AdminPage() {
             <div className="text-xs uppercase tracking-widest text-maroon-700/60 mt-1">Total Guests Attending</div>
           </div>
         </div>
+        {loadError && (
+          <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+            {loadError}
+          </p>
+        )}
+
         {/* RSVPs Table Component */}
         <RsvpTable initialData={rsvps} />
       </div>

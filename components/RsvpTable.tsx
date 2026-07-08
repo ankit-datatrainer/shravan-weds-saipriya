@@ -4,13 +4,13 @@ import { useState } from "react";
 import { Trash2, Pencil, X, Save, Loader2 } from "lucide-react";
 
 type RsvpEntry = {
-  id?: string;
+  id: string;
   name: string;
   phone: string;
   events: string;
   guests: string;
   message: string;
-  at: string;
+  created_at: string;
 };
 
 export default function RsvpTable({ initialData }: { initialData: RsvpEntry[] }) {
@@ -25,22 +25,19 @@ export default function RsvpTable({ initialData }: { initialData: RsvpEntry[] })
 
     setIsDeleting(id);
     try {
-      const stored = localStorage.getItem("wedding_rsvps");
-      if (stored) {
-        const parsed = JSON.parse(stored) as RsvpEntry[];
-        const updated = parsed.filter(r => (r.id || r.at) !== id);
-        localStorage.setItem("wedding_rsvps", JSON.stringify(updated));
-        setRsvps(prev => prev.filter((r) => (r.id || r.at) !== id));
-      }
+      const res = await fetch(`/api/rsvp/${id}`, { method: "DELETE" });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to delete");
+      setRsvps((prev) => prev.filter((r) => r.id !== id));
     } catch (err) {
-      alert("Error deleting RSVP");
+      alert(err instanceof Error ? err.message : "Error deleting RSVP");
     } finally {
       setIsDeleting(null);
     }
   };
 
   const startEdit = (rsvp: RsvpEntry) => {
-    setIsEditing(rsvp.id || rsvp.at);
+    setIsEditing(rsvp.id);
     setEditForm(rsvp);
   };
 
@@ -52,22 +49,21 @@ export default function RsvpTable({ initialData }: { initialData: RsvpEntry[] })
   const handleSave = async () => {
     if (!isEditing) return;
     setIsSaving(true);
-    
+
     try {
-      const stored = localStorage.getItem("wedding_rsvps");
-      if (stored) {
-        const parsed = JSON.parse(stored) as RsvpEntry[];
-        const updated = parsed.map(r => 
-          (r.id || r.at) === isEditing ? { ...r, ...editForm } as RsvpEntry : r
-        );
-        localStorage.setItem("wedding_rsvps", JSON.stringify(updated));
-        setRsvps(prev =>
-          prev.map((r) => ((r.id || r.at) === isEditing ? { ...r, ...editForm } as RsvpEntry : r))
-        );
-        setIsEditing(null);
-      }
+      const res = await fetch(`/api/rsvp/${isEditing}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(editForm),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to update");
+      setRsvps((prev) =>
+        prev.map((r) => (r.id === isEditing ? { ...r, ...data.entry } : r))
+      );
+      setIsEditing(null);
     } catch (err) {
-      alert("Error updating RSVP");
+      alert(err instanceof Error ? err.message : "Error updating RSVP");
     } finally {
       setIsSaving(false);
     }
@@ -98,12 +94,11 @@ export default function RsvpTable({ initialData }: { initialData: RsvpEntry[] })
           </thead>
           <tbody>
             {rsvps.map((entry, index) => {
-              const entryId = entry.id || entry.at;
-              const isThisEditing = isEditing === entryId;
+              const isThisEditing = isEditing === entry.id;
 
               return (
                 <tr
-                  key={entryId}
+                  key={entry.id}
                   className={`border-b border-blush-100 last:border-0 ${
                     index % 2 === 0 ? "bg-white" : "bg-cream/30"
                   }`}
@@ -156,7 +151,7 @@ export default function RsvpTable({ initialData }: { initialData: RsvpEntry[] })
                         />
                       </td>
                       <td className="px-6 py-4 text-maroon-700/60 whitespace-nowrap">
-                        {new Date(entry.at).toLocaleDateString()}
+                        {new Date(entry.created_at).toLocaleDateString()}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right space-x-2">
                         <button
@@ -197,7 +192,7 @@ export default function RsvpTable({ initialData }: { initialData: RsvpEntry[] })
                         {entry.message || "-"}
                       </td>
                       <td className="px-6 py-4 text-maroon-700/60 whitespace-nowrap">
-                        {new Date(entry.at).toLocaleDateString()}
+                        {new Date(entry.created_at).toLocaleDateString()}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right space-x-2">
                         <button
@@ -208,12 +203,12 @@ export default function RsvpTable({ initialData }: { initialData: RsvpEntry[] })
                           <Pencil className="w-4 h-4" />
                         </button>
                         <button
-                          onClick={() => handleDelete(entryId)}
-                          disabled={isDeleting === entryId}
+                          onClick={() => handleDelete(entry.id)}
+                          disabled={isDeleting === entry.id}
                           className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors inline-flex"
                           title="Delete"
                         >
-                          {isDeleting === entryId ? (
+                          {isDeleting === entry.id ? (
                             <Loader2 className="w-4 h-4 animate-spin" />
                           ) : (
                             <Trash2 className="w-4 h-4" />
