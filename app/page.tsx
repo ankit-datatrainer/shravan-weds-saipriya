@@ -1,3 +1,4 @@
+import CinematicIntro from "@/components/CinematicIntro";
 import Hero from "@/components/Hero";
 import SaveTheDate from "@/components/SaveTheDate";
 import Events from "@/components/Events";
@@ -11,13 +12,16 @@ export default function Home() {
   return (
     <InviteReveal>
       <main>
-        <FallingPetals />
-        <Hero />
-        <SaveTheDate />
-        <Events />
-        <Venue />
-        <Rsvp />
-        <Footer />
+        <CinematicIntro />
+        <div className="relative">
+          <FallingPetals />
+          <Hero />
+          <SaveTheDate />
+          <Events />
+          <Venue />
+          <Rsvp />
+          <Footer />
+        </div>
       </main>
     </InviteReveal>
   );
