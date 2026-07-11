@@ -12,9 +12,9 @@ interface Rose {
   img: string;
 }
 
-const ROSE_IMAGES = ["/images/rose1.png"];
+const ROSE_IMAGES = ["/images/white_rose.png"];
 
-/** Small cute red roses drifting down randomly over the whole page. */
+/** Small cute white roses drifting down randomly over the whole page. */
 export default function FallingPetals({ count = 12 }: { count?: number }) {
   const [roses, setRoses] = useState<Rose[]>([]);
 

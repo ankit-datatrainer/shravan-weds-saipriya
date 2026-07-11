@@ -11,7 +11,17 @@ import BackgroundMusic from "./BackgroundMusic";
  * user gesture, which lets the background music start (mobile autoplay
  * rules) and reveals the scroll-scrubbed experience underneath.
  */
-export default function InviteReveal({ children }: { children: React.ReactNode }) {
+export default function InviteReveal({
+  children,
+  musicSrc,
+  musicLoopStart,
+  musicLoopEnd,
+}: {
+  children: React.ReactNode;
+  musicSrc?: string;
+  musicLoopStart?: number;
+  musicLoopEnd?: number;
+}) {
   const [started, setStarted] = useState(false);
 
   return (
@@ -77,7 +87,12 @@ export default function InviteReveal({ children }: { children: React.ReactNode }
         {children}
       </motion.div>
 
-      <BackgroundMusic playWhen={started} />
+      <BackgroundMusic
+        playWhen={started}
+        src={musicSrc}
+        loopStart={musicLoopStart}
+        loopEnd={musicLoopEnd}
+      />
     </>
   );
 }

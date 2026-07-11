@@ -4,22 +4,34 @@ import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 
 /**
- * Loops the wedding bgm once `playWhen` turns true (i.e. after the
- * card is opened, so it counts as a user gesture for autoplay rules),
- * and exposes a small floating toggle so guests can mute it.
+ * Loops a chosen segment of a track once `playWhen` turns true (i.e.
+ * after the card is opened, so it counts as a user gesture for
+ * autoplay rules), and exposes a small floating toggle so guests can
+ * mute it. Defaults match the original home-page bgm (first 28s).
  */
-export default function BackgroundMusic({ playWhen }: { playWhen: boolean }) {
+export default function BackgroundMusic({
+  playWhen,
+  src = "/audio/bgm.mp3",
+  loopStart = 0,
+  loopEnd = 28,
+}: {
+  playWhen: boolean;
+  src?: string;
+  loopStart?: number;
+  loopEnd?: number;
+}) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [muted, setMuted] = useState(false);
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
     if (playWhen && !started && audioRef.current) {
+      audioRef.current.currentTime = loopStart;
       audioRef.current.volume = 0.45;
       audioRef.current.play().catch(() => {});
       setStarted(true);
     }
-  }, [playWhen, started]);
+  }, [playWhen, started, loopStart]);
 
   function toggle() {
     const audio = audioRef.current;
@@ -33,19 +45,19 @@ export default function BackgroundMusic({ playWhen }: { playWhen: boolean }) {
   }
 
   function handleTimeUpdate() {
-    if (audioRef.current && audioRef.current.currentTime >= 28) {
-      audioRef.current.currentTime = 0;
+    const audio = audioRef.current;
+    if (audio && audio.currentTime >= loopEnd) {
+      audio.currentTime = loopStart;
     }
   }
 
   return (
     <>
-      <audio 
-        ref={audioRef} 
-        src="/audio/bgm.mp3" 
-        loop 
-        preload="none" 
-        onTimeUpdate={handleTimeUpdate} 
+      <audio
+        ref={audioRef}
+        src={src}
+        preload="none"
+        onTimeUpdate={handleTimeUpdate}
       />
       {started && (
         <button

@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function InvitePage() {
   return (
-    <InviteReveal>
+    <InviteReveal musicSrc="/audio/bgm2.mp3" musicLoopStart={77} musicLoopEnd={116}>
       <main>
         <CinematicIntro />
         <div className="relative">
