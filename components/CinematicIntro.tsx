@@ -89,24 +89,28 @@ export default function CinematicIntro() {
           className="absolute inset-0 h-full w-full object-cover"
         />
 
-        {/* readability veil */}
+        {/* readability veil: darkens top+bottom always, strengthens on scroll */}
         <div
-          className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"
+          className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/10 to-black/70"
           style={{ opacity: veil }}
         />
+
+        {/* extra scrim focused behind the center text so it reads on any footage */}
+        <div className="pointer-events-none absolute inset-0 bg-black/35" />
+        <div className="pointer-events-none absolute inset-x-0 top-1/3 -translate-y-1/2 h-72 bg-black/30 blur-3xl" />
 
         {/* Opening title */}
         <div
           className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center"
           style={{ opacity: titleOpacity, transform: `scale(${1 + progress * 0.15})` }}
         >
-          <p className="font-devanagari text-gold-200 text-sm sm:text-lg tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]">
+          <p className="font-devanagari text-gold-200 text-sm sm:text-lg tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
             {wedding.shloka.devanagari}
           </p>
-          <p className="section-eyebrow mt-4 text-[10px] sm:text-xs tracking-[0.35em] text-cream/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+          <p className="section-eyebrow mt-4 text-[10px] sm:text-xs tracking-[0.35em] text-cream drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
             Together with our families
           </p>
-          <h2 className="mt-3 font-heading text-3xl sm:text-5xl md:text-6xl tracking-[0.2em] text-white drop-shadow-[0_3px_12px_rgba(0,0,0,0.85)]">
+          <h2 className="mt-3 font-heading text-3xl sm:text-5xl md:text-6xl tracking-[0.2em] text-white [text-shadow:0_2px_6px_rgba(0,0,0,0.9),0_4px_24px_rgba(0,0,0,0.9)]">
             YOU&apos;RE INVITED
           </h2>
         </div>
@@ -117,30 +121,30 @@ export default function CinematicIntro() {
           style={{ opacity: namesOpacity }}
         >
           <h1 className="font-script flex flex-col items-center gap-2 leading-none">
-            <span className="px-4 text-[2.4rem] leading-tight sm:text-7xl md:text-8xl text-white drop-shadow-[0_3px_16px_rgba(0,0,0,0.85)]">
+            <span className="px-4 text-[2.4rem] leading-tight sm:text-7xl md:text-8xl text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.9),0_6px_28px_rgba(0,0,0,0.9)]">
               {wedding.groom.name}
             </span>
-            <span className="my-1 font-sans text-2xl sm:text-3xl italic text-gold-300 drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
+            <span className="my-1 font-sans text-2xl sm:text-3xl italic text-gold-300 [text-shadow:0_2px_8px_rgba(0,0,0,0.9)]">
               &amp;
             </span>
-            <span className="px-4 text-[2.4rem] leading-tight sm:text-7xl md:text-8xl text-white drop-shadow-[0_3px_16px_rgba(0,0,0,0.85)]">
+            <span className="px-4 text-[2.4rem] leading-tight sm:text-7xl md:text-8xl text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.9),0_6px_28px_rgba(0,0,0,0.9)]">
               {wedding.bride.name}
             </span>
           </h1>
           <div className="mt-6 h-px w-40 bg-gradient-to-r from-transparent via-gold-400 to-transparent" />
-          <p className="mt-4 text-[11px] sm:text-sm uppercase tracking-[0.35em] text-cream/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+          <p className="mt-4 text-[11px] sm:text-sm uppercase tracking-[0.35em] text-cream drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
             {wedding.dateDisplay}
           </p>
         </div>
 
         {/* Scroll hint */}
         <div
-          className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 rounded-full bg-black/40 px-4 py-3 backdrop-blur-sm"
           style={{ opacity: hintOpacity }}
         >
-          <span className="text-[10px] uppercase tracking-[0.3em] text-cream/80">Scroll</span>
-          <span className="h-9 w-5 rounded-full border border-cream/60 flex justify-center pt-1.5">
-            <span className="h-2 w-1 rounded-full bg-cream/80 animate-bounce" />
+          <span className="text-[10px] uppercase tracking-[0.3em] text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">Scroll</span>
+          <span className="h-9 w-5 rounded-full border border-white/80 flex justify-center pt-1.5">
+            <span className="h-2 w-1 rounded-full bg-white animate-bounce" />
           </span>
         </div>
       </div>
