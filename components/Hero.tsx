@@ -30,18 +30,31 @@ export default function Hero() {
         <div className="pointer-events-none absolute inset-2 sm:inset-3 rounded-t-[8.4rem] sm:rounded-t-[11.2rem] rounded-b-2xl border border-gold-400/35" />
         <Sparkles />
 
-        <motion.p
+        {/* Ganesha */}
+        <motion.div
           custom={0}
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          className="font-devanagari text-maroon-700 text-base sm:text-lg tracking-wide"
+          className="flex justify-center mb-6"
+        >
+          <div className="relative shrink-0 h-28 w-28 sm:h-32 sm:w-32 rounded-full shadow-[0_0_40px_rgba(212,175,55,0.4)] ring-[3px] ring-gold-400/50 overflow-hidden bg-gradient-to-b from-white to-cream/80">
+            <Image src="/images/ganesh_ji.png" alt="Lord Ganesha" fill className="object-contain p-2 drop-shadow-xl" />
+          </div>
+        </motion.div>
+
+        <motion.p
+          custom={1}
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          className="font-devanagari text-maroon-700 text-xl sm:text-2xl tracking-wide font-medium"
         >
           {wedding.shloka.devanagari}
         </motion.p>
 
         <motion.p
-          custom={1}
+          custom={2}
           initial="hidden"
           animate="visible"
           variants={fadeUp}
@@ -51,7 +64,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.h1
-          custom={2}
+          custom={3}
           initial="hidden"
           animate="visible"
           variants={fadeUp}
@@ -60,7 +73,7 @@ export default function Hero() {
           WELCOME
         </motion.h1>
 
-        <motion.div custom={3} initial="hidden" animate="visible" variants={fadeUp}>
+        <motion.div custom={4} initial="hidden" animate="visible" variants={fadeUp}>
           <div className="mx-auto mt-3 h-px w-40 sm:w-56 bg-gradient-to-r from-transparent via-gold-500 to-transparent" />
           <p className="mt-3 font-heading text-sm sm:text-base tracking-[0.35em] text-maroon-700/80 uppercase">
             To the Wedding of
@@ -68,7 +81,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          custom={4}
+          custom={5}
           initial="hidden"
           animate="visible"
           variants={fadeUp}
@@ -96,7 +109,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          custom={5}
+          custom={6}
           initial="hidden"
           animate="visible"
           variants={fadeUp}
@@ -105,7 +118,7 @@ export default function Hero() {
           <Image src="/images/couple.jpeg" alt="Shravan and Sai Priya" fill className="object-cover object-center" />
         </motion.div>
 
-        <motion.div custom={6} initial="hidden" animate="visible" variants={fadeUp} className="mt-4">
+        <motion.div custom={7} initial="hidden" animate="visible" variants={fadeUp} className="mt-4">
 
           <p className="mt-2 section-eyebrow">{wedding.hashtag}</p>
         </motion.div>

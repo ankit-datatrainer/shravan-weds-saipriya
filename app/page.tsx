@@ -10,11 +10,11 @@ import FallingPetals from "@/components/decor/FallingPetals";
 
 export default function Home() {
   return (
-    <InviteReveal>
+    <InviteReveal variant="home">
       <main>
         <CinematicIntro />
         <div className="relative">
-          <FallingPetals />
+          <FallingPetals color="red" />
           <Hero />
           <SaveTheDate />
           <Events />

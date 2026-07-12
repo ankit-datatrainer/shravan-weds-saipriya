@@ -8,14 +8,14 @@ export default function Footer() {
       {/* Decorative Top Border using Roses */}
       <div className="absolute top-0 left-0 w-full h-12 flex justify-between items-start pointer-events-none opacity-80">
         <Image 
-          src="/images/white_rose.png" 
+          src="/images/white_rose_1.png" 
           alt="rose" 
           width={100} 
           height={100} 
           className="w-24 h-24 object-contain -translate-y-1/2 -translate-x-1/2 rotate-12" 
         />
         <Image 
-          src="/images/white_rose.png" 
+          src="/images/white_rose_2.png" 
           alt="rose" 
           width={100} 
           height={100} 

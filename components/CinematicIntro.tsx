@@ -62,11 +62,11 @@ export default function CinematicIntro() {
 
   // Fade helpers based on scroll progress (0..1).
   const clamp = (v: number) => Math.min(Math.max(v, 0), 1);
-  // Opening title: visible at start, gone by ~40%.
-  const titleOpacity = clamp(1 - progress / 0.42);
-  // Names: rise in around 45%–75%.
+  // Opening title: visible at start, gone by ~15%.
+  const titleOpacity = clamp(1 - progress / 0.15);
+  // Names: rise in around 15%–35%.
   const namesOpacity =
-    progress < 0.4 ? 0 : progress < 0.62 ? clamp((progress - 0.4) / 0.22) : clamp(1 - (progress - 0.72) / 0.18);
+    progress < 0.15 ? 0 : progress < 0.35 ? clamp((progress - 0.15) / 0.20) : clamp(1 - (progress - 0.8) / 0.15);
   // Scroll hint fades out as soon as you start.
   const hintOpacity = clamp(1 - progress / 0.12);
   // Dark vignette deepens toward the end so text stays readable.
@@ -104,21 +104,27 @@ export default function CinematicIntro() {
           className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center"
           style={{ opacity: titleOpacity, transform: `scale(${1 + progress * 0.15})` }}
         >
-          <p className="font-devanagari text-gold-200 text-sm sm:text-lg tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+          <p className="font-devanagari text-white text-lg sm:text-2xl font-bold tracking-wider drop-shadow-[0_4px_12px_rgba(0,0,0,0.95)] bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm border border-gold-400/30">
             {wedding.shloka.devanagari}
           </p>
-          <p className="section-eyebrow mt-4 text-[10px] sm:text-xs tracking-[0.35em] text-cream drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+          <p className="section-eyebrow mt-6 text-[10px] sm:text-xs tracking-[0.35em] text-cream drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
             Together with our families
           </p>
           <h2 className="mt-3 font-heading text-3xl sm:text-5xl md:text-6xl tracking-[0.2em] text-white [text-shadow:0_2px_6px_rgba(0,0,0,0.9),0_4px_24px_rgba(0,0,0,0.9)]">
             YOU&apos;RE INVITED
           </h2>
+          <p className="mt-4 font-script text-3xl sm:text-5xl text-gold-300 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+            {wedding.groom.name} &amp; {wedding.bride.name}
+          </p>
         </div>
 
         {/* Names reveal */}
         <div
           className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center"
-          style={{ opacity: namesOpacity }}
+          style={{ 
+            opacity: namesOpacity,
+            transform: `scale(${0.9 + (namesOpacity * 0.1)}) translateY(${(1 - namesOpacity) * 30}px)`
+          }}
         >
           <h1 className="font-script flex flex-col items-center gap-2 leading-none">
             <span className="px-4 text-[2.4rem] leading-tight sm:text-7xl md:text-8xl text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.9),0_6px_28px_rgba(0,0,0,0.9)]">

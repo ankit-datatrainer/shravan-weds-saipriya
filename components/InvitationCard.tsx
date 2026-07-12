@@ -66,14 +66,14 @@ export default function InvitationCard() {
 
         {/* Content in the open cream centre — generous side padding keeps
             text clear of the painted florals on every edge. */}
-        <div className="flex flex-col items-center px-[13%] sm:px-[15%] pt-[16%] pb-[15%] text-center text-[#7c5e33]">
+        <div className="flex flex-col items-center px-[13%] sm:px-[15%] pt-[16%] pb-[15%] text-center text-[#432d16]">
           <motion.p
             custom={0}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="font-devanagari text-[0.8rem] sm:text-base tracking-wide text-[#9a7b42]"
+            className="font-devanagari text-[0.8rem] sm:text-base tracking-wide text-[#5a4422]"
           >
             {wedding.shloka.devanagari}
           </motion.p>
@@ -84,7 +84,7 @@ export default function InvitationCard() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="mt-5 font-heading text-[0.72rem] sm:text-sm uppercase tracking-[0.28em] text-[#8a6f45]"
+            className="mt-5 font-heading text-[0.72rem] sm:text-sm uppercase tracking-[0.28em] text-[#4d3c23]"
           >
             Together with their families
           </motion.p>
@@ -94,7 +94,7 @@ export default function InvitationCard() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="font-heading text-[0.72rem] sm:text-sm uppercase tracking-[0.28em] text-[#8a6f45]"
+            className="font-heading text-[0.72rem] sm:text-sm uppercase tracking-[0.28em] text-[#4d3c23]"
           >
             request the pleasure of your company
           </motion.p>
@@ -108,11 +108,11 @@ export default function InvitationCard() {
             variants={fadeUp}
             className="mt-6 flex flex-col items-center leading-none"
           >
-            <span className="font-script text-[2.6rem] sm:text-6xl text-[#9c7226]">
+            <span className="font-script text-[2.6rem] sm:text-6xl text-[#664917]">
               {wedding.groom.name}
             </span>
-            <span className="my-1 font-heading text-xl sm:text-2xl italic text-[#b08a4a]">and</span>
-            <span className="font-script text-[2.6rem] sm:text-6xl text-[#9c7226]">
+            <span className="my-1 font-heading text-xl sm:text-2xl italic text-[#7a5e30]">and</span>
+            <span className="font-script text-[2.6rem] sm:text-6xl text-[#664917]">
               {wedding.bride.name}
             </span>
           </motion.h1>
@@ -128,12 +128,12 @@ export default function InvitationCard() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="mt-1 flex items-center justify-center gap-3 font-heading text-[#7c5e33]"
+            className="mt-1 flex items-center justify-center gap-3 font-heading text-[#432d16]"
           >
             <span className="text-base sm:text-xl uppercase tracking-[0.15em]">{month}</span>
-            <span className="text-[#c9b48a]">|</span>
+            <span className="text-[#8c7a56]">|</span>
             <span className="text-2xl sm:text-4xl font-semibold">{day}</span>
-            <span className="text-[#c9b48a]">|</span>
+            <span className="text-[#8c7a56]">|</span>
             <span className="text-base sm:text-xl tracking-[0.1em]">{year}</span>
           </motion.div>
           <motion.p
@@ -142,7 +142,7 @@ export default function InvitationCard() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="mt-3 inline-flex items-center gap-2 text-[0.8rem] sm:text-sm text-[#8a6f45]"
+            className="mt-3 inline-flex items-center gap-2 text-[0.8rem] sm:text-sm text-[#4d3c23]"
           >
             <Clock className="h-3.5 w-3.5" />
             {wedding.events.find((e) => e.theme === "wedding")?.time ?? "11:23 AM"}
@@ -155,16 +155,16 @@ export default function InvitationCard() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="mt-7 space-y-4 text-[#7c5e33]"
+            className="mt-7 space-y-4 text-[#432d16]"
           >
             <div>
-              <p className="font-heading text-base sm:text-lg text-[#8a5a2e]">{wedding.groom.fullName}</p>
-              <p className="mt-0.5 text-[0.72rem] sm:text-[0.85rem] text-[#8a6f45]">{wedding.groom.parents}</p>
+              <p className="font-heading text-base sm:text-lg text-[#54351a]">{wedding.groom.fullName}</p>
+              <p className="mt-0.5 text-[0.72rem] sm:text-[0.85rem] text-[#4d3c23]">{wedding.groom.parents}</p>
             </div>
-            <p className="font-script text-2xl text-[#b08a4a]">&amp;</p>
+            <p className="font-script text-2xl text-[#7a5e30]">&amp;</p>
             <div>
-              <p className="font-heading text-base sm:text-lg text-[#8a5a2e]">{wedding.bride.fullName}</p>
-              <p className="mt-0.5 text-[0.72rem] sm:text-[0.85rem] text-[#8a6f45]">{wedding.bride.parents}</p>
+              <p className="font-heading text-base sm:text-lg text-[#54351a]">{wedding.bride.fullName}</p>
+              <p className="mt-0.5 text-[0.72rem] sm:text-[0.85rem] text-[#4d3c23]">{wedding.bride.parents}</p>
             </div>
           </motion.div>
 
@@ -177,16 +177,16 @@ export default function InvitationCard() {
             variants={fadeUp}
             className="mt-7"
           >
-            <p className="inline-flex items-center gap-2 font-heading text-[0.72rem] sm:text-sm uppercase tracking-[0.28em] text-[#8a6f45]">
+            <p className="inline-flex items-center gap-2 font-heading text-[0.72rem] sm:text-sm uppercase tracking-[0.28em] text-[#4d3c23]">
               <MapPin className="h-3.5 w-3.5" /> Venue
             </p>
-            <p className="mt-2 font-heading text-base sm:text-xl text-[#8a5a2e]">{wedding.venue.name}</p>
-            <p className="mt-1 text-[0.72rem] sm:text-[0.85rem] text-[#8a6f45]">{wedding.venue.address}</p>
+            <p className="mt-2 font-heading text-base sm:text-xl text-[#54351a]">{wedding.venue.name}</p>
+            <p className="mt-1 text-[0.72rem] sm:text-[0.85rem] text-[#4d3c23]">{wedding.venue.address}</p>
             <a
               href={wedding.venue.mapUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-2 rounded-full border border-[#c9a44f] bg-white/40 px-5 py-2 text-[0.68rem] sm:text-xs uppercase tracking-[0.2em] text-[#8a5a2e] backdrop-blur-sm transition hover:bg-[#c9a44f] hover:text-white"
+              className="mt-4 inline-flex items-center gap-2 rounded-full border border-[#8c7a56] bg-white/40 px-5 py-2 text-[0.68rem] sm:text-xs uppercase tracking-[0.2em] text-[#54351a] backdrop-blur-sm transition hover:bg-[#8c7a56] hover:text-white"
             >
               <Navigation className="h-3.5 w-3.5" /> Get Directions
             </a>
@@ -198,7 +198,7 @@ export default function InvitationCard() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="mt-7 font-heading text-[0.68rem] sm:text-xs uppercase tracking-[0.3em] text-[#9a7b42]"
+            className="mt-7 font-heading text-[0.68rem] sm:text-xs uppercase tracking-[0.3em] text-[#5a4422]"
           >
             {wedding.hashtag}
           </motion.p>

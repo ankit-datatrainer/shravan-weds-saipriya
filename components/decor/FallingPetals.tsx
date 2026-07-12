@@ -12,25 +12,28 @@ interface Rose {
   img: string;
 }
 
-const ROSE_IMAGES = ["/images/white_rose.png"];
+const WHITE_ROSE_IMAGES = ["/images/white_rose_1.png", "/images/white_rose_2.png"];
+const RED_ROSE_IMAGES = ["/images/rose1.png"];
 
-/** Small cute white roses drifting down randomly over the whole page. */
-export default function FallingPetals({ count = 12 }: { count?: number }) {
+/** Small cute roses drifting down randomly over the whole page. */
+export default function FallingPetals({ count = 20, color = "white" }: { count?: number, color?: "white" | "red" }) {
   const [roses, setRoses] = useState<Rose[]>([]);
 
   useEffect(() => {
+    const images = color === "red" ? RED_ROSE_IMAGES : WHITE_ROSE_IMAGES;
+    
     setRoses(
       Array.from({ length: count }, () => ({
         left: Math.random() * 100,
-        size: 35 + Math.random() * 20, // Medium flowers
+        size: 25 + Math.random() * 15, // Medium flowers
         dur: 11 + Math.random() * 10,
         delay: -(Math.random() * 20), // Negative delay so they start immediately
         sway: (Math.random() - 0.5) * 180,
         spin: 120 + Math.random() * 360,
-        img: ROSE_IMAGES[Math.floor(Math.random() * ROSE_IMAGES.length)],
+        img: images[Math.floor(Math.random() * images.length)],
       }))
     );
-  }, [count]);
+  }, [count, color]);
 
   return (
     <div className="pointer-events-none fixed inset-0 z-30 overflow-hidden" aria-hidden="true">
