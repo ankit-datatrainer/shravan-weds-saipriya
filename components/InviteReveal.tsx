@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { wedding } from "@/lib/config";
 import Image from "next/image";
-import BackgroundMusic from "./BackgroundMusic";
+import BackgroundMusic, { BackgroundMusicRef } from "./BackgroundMusic";
 
 /**
  * A beautiful "tap to begin" splash screen with custom background images
@@ -24,6 +24,12 @@ export default function InviteReveal({
   variant?: "home" | "invite";
 }) {
   const [started, setStarted] = useState(false);
+  const musicRef = useRef<BackgroundMusicRef>(null);
+
+  const handleOpen = () => {
+    musicRef.current?.playMusic();
+    setStarted(true);
+  };
 
   return (
     <>
@@ -43,7 +49,7 @@ export default function InviteReveal({
 
               <button
                 type="button"
-                onClick={() => setStarted(true)}
+                onClick={handleOpen}
                 className="group relative flex flex-col items-center justify-center gap-4 outline-none"
                 aria-label="Open the wedding invitation"
               >
@@ -104,7 +110,7 @@ export default function InviteReveal({
               {/* Clickable overlay with animated text */}
               <button
                 type="button"
-                onClick={() => setStarted(true)}
+                onClick={handleOpen}
                 className="absolute inset-0 z-10 flex flex-col items-center justify-center outline-none cursor-pointer overflow-y-auto pt-4 pb-2 sm:pt-6 sm:pb-4"
                 aria-label="Open the wedding invitation"
               >
@@ -224,7 +230,7 @@ export default function InviteReveal({
       </motion.div>
 
       <BackgroundMusic
-        playWhen={started}
+        ref={musicRef}
         src={musicSrc}
         loopStart={musicLoopStart}
         loopEnd={musicLoopEnd}

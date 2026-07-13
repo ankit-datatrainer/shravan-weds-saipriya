@@ -1,37 +1,39 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, forwardRef, useImperativeHandle } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 
+export interface BackgroundMusicRef {
+  playMusic: () => void;
+}
+
 /**
- * Loops a chosen segment of a track once `playWhen` turns true (i.e.
- * after the card is opened, so it counts as a user gesture for
- * autoplay rules), and exposes a small floating toggle so guests can
- * mute it. Defaults match the original home-page bgm (first 28s).
+ * Loops a chosen segment of a track once `playMusic()` is called via ref 
+ * (i.e. on direct user click, satisfying strict autoplay rules), and exposes 
+ * a small floating toggle so guests can mute it.
  */
-export default function BackgroundMusic({
-  playWhen,
-  src = "/audio/bgm.mp3",
-  loopStart = 0,
-  loopEnd = 28,
-}: {
-  playWhen: boolean;
+const BackgroundMusic = forwardRef<BackgroundMusicRef, {
   src?: string;
   loopStart?: number;
   loopEnd?: number;
-}) {
+}>(({ src = "/audio/bgm.mp3", loopStart = 0, loopEnd = 28 }, ref) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [muted, setMuted] = useState(false);
   const [started, setStarted] = useState(false);
 
-  useEffect(() => {
-    if (playWhen && !started && audioRef.current) {
-      audioRef.current.currentTime = loopStart;
-      audioRef.current.volume = 0.45;
-      audioRef.current.play().catch(() => {});
-      setStarted(true);
+  useImperativeHandle(ref, () => ({
+    playMusic: () => {
+      if (audioRef.current && !started) {
+        audioRef.current.currentTime = loopStart;
+        audioRef.current.volume = 0.45;
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {});
+        }
+        setStarted(true);
+      }
     }
-  }, [playWhen, started, loopStart]);
+  }));
 
   function toggle() {
     const audio = audioRef.current;
@@ -56,7 +58,7 @@ export default function BackgroundMusic({
       <audio
         ref={audioRef}
         src={src}
-        preload="none"
+        preload="auto"
         onTimeUpdate={handleTimeUpdate}
       />
       {started && (
@@ -71,4 +73,8 @@ export default function BackgroundMusic({
       )}
     </>
   );
-}
+});
+
+BackgroundMusic.displayName = "BackgroundMusic";
+
+export default BackgroundMusic;
