@@ -25,7 +25,7 @@ const BackgroundMusic = forwardRef<BackgroundMusicRef, {
     playMusic: () => {
       if (audioRef.current && !started) {
         audioRef.current.currentTime = loopStart;
-        audioRef.current.volume = 0.45;
+        audioRef.current.volume = 0.7;
         const playPromise = audioRef.current.play();
         if (playPromise !== undefined) {
           playPromise.catch(() => {});
